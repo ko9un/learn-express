@@ -1,0 +1,29 @@
+{
+  "name": "learn-express",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "start": "nodemon app"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ko9un/learn-express.git"
+  },
+  "author": "ktw1633@gmail.com",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ko9un/learn-express/issues"
+  },
+  "homepage": "https://github.com/ko9un/learn-express#readme",
+  "dependencies": {
+    "cookie-parser": "^1.4.6",
+    "express": "^4.18.2",
+    "express-session": "^1.17.3",
+    "morgan": "^1.10.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.20",
+    "rimraf": "^3.0.2"
+  }
+}
