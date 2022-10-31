@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+
+<head>
+    <meta charset="UTF-8">
+   
+    <title>Document</title>
+
+</head>
+<body>
+    <H1>{{title}}</H1>
+    <p> Welcome to {{title}}</p>
+    <button class="{{title}}",type="submit">전송</button>
+    <input placeholder=" {{title}} 연습"/>
+
+    {% set name='Lia' %}
+    <h1>Hello, {{name}}</h1>
+
+    <ul>
+        {% set people = ['Team', 'Lia', 'Matthew', 'David'] %} <!-- 배열 변수 선언 -->
+        {% for human in people %} <!-- 반복분 선언 -->
+        <li>{{loop.index}}번째 {{human}}</li>
+        {% endfor %} <!-- for문 끝지점 명시 -->
+      </ul>
+    
+    {% set navigation = [
+        { 'name': '1' , 'url': '1.html' },
+        { 'name': '2' , 'url': '2.html' },
+        { 'name': '3' , 'url': '3.html' }
+    ] %}
+     
+    {% for item in navigation %}
+         <a href="{{item.url}}">{{item.name}}</a>
+    {% endfor %}
+
+    <h1>{{ '참' if true else '거짓' }}</h1>
+
+
+
+
+    {% include "header.html"%}
+<main>
+  <h1>Main File</h1>
+</main>
+
+{% include "footer.html"%}
+
+{% extends 'layout.html' %}
+{% block content %}
+<h>{{title}}</h>
+<p>welocme to {{title}}</p>
+{% endblock %}
+
+    
+    
+    
+</body>
+</html>
