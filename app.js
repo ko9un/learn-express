@@ -12,10 +12,16 @@ dotenv.config();
 const app = express();
 const port = process.env.PORT || 8888;
 
+
+/* body-parser*/
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
+
+
 /*req 어떤 요청이 들어왔는지 출력  추가적인 로그 */ 
 app.use(morgan('dev'));
 
-/*static 미들웨어 */
+/*static 미들웨어 경로처리 */
 app.request('/',express.static(path.join(__dirname,'public')));
 
 
@@ -40,6 +46,7 @@ app.use((err,req,res,next)=>{
   console.error(err);
   res.status(500).send(err.message);
 });
+
 
 
 
