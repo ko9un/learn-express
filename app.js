@@ -1,6 +1,10 @@
 const express = require('express');
+
 const dotenv = require('dotenv');
+
 const morgan = require('morgan');
+
+const path = require('path');
 
 
 /*환경변수설정*/
@@ -8,8 +12,11 @@ dotenv.config();
 const app = express();
 const port = process.env.PORT || 8888;
 
-
+/*req 어떤 요청이 들어왔는지 출력  추가적인 로그 */ 
 app.use(morgan('dev'));
+
+/*static 미들웨어 */
+app.request('/',express.static(path.join(__dirname,'public')));
 
 
 
