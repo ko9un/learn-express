@@ -6,6 +6,11 @@ const morgan = require('morgan');
 
 const path = require('path');
 
+const cookieParser = require('cookie-parser');
+
+
+
+
 
 /*환경변수설정*/
 dotenv.config();
@@ -16,13 +21,25 @@ const port = process.env.PORT || 8888;
 /* body-parser*/
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-
-
 /*req 어떤 요청이 들어왔는지 출력  추가적인 로그 */ 
 app.use(morgan('dev'));
-
 /*static 미들웨어 경로처리 */
 app.request('/',express.static(path.join(__dirname,'public')));
+
+/*cookie-parse* 세션(로그인유지)
+AJAX 쿠키X API O
+*/
+app.use(cookieParser(process.env.COOKIE_SECRET));
+app.use(session({
+  resave:false,
+  saveUninitialized: false,
+  secret: process.env.COOKIE_SECRET,
+  cookie:{
+    httpOnly: true,
+    secure: false,
+  },
+  name: 'session-cookie',
+}));
 
 
 
