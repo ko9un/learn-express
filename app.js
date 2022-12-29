@@ -1,11 +1,15 @@
 const express = require('express');
-
-
 const dotenv = require('dotenv');
+const morgan = require('morgan');
 
+
+/*환경변수설정*/
 dotenv.config();
 const app = express();
 const port = process.env.PORT || 8888;
+
+
+app.use(morgan('dev'));
 
 
 
