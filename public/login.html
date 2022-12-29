@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- Add icon library -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
+    />
+    <style>
+      body {
+        font-family: Arial, Helvetica, sans-serif;
+        display: grid;
+        justify-content: center;
+      }
+      /* 기본 width: content-box에서 width: box-sizing으로 변경 */
+      /* padding을 포함한 값이 width가 된다 */
+      * {
+        box-sizing: border-box;
+      }
+
+      form {
+        height: 83px;
+        display: flex;
+        gap: 5px;
+        flex-direction: column;
+        flex-wrap: wrap;
+        max-width: 300px;
+        margin: auto;
+      }
+
+      .input-container {
+        display: flex;
+        width: 200px;
+      }
+
+      .icon {
+        padding: 10px;
+        background: darkcyan;
+        color: white;
+        min-width: 50px;
+        text-align: center;
+      }
+
+      .input-field {
+        width: 100%;
+        padding: 10px;
+        outline: none;
+        border: 2px solid darkcyan;
+      }
+
+      /* Set a style for the submit button */
+      .btn {
+        background-color: darkcyan;
+        color: white;
+        padding: 15px 20px;
+        border: none;
+        cursor: pointer;
+        height: 100%;
+        opacity: 0.9;
+      }
+
+      .btn:hover {
+        opacity: 1;
+      }
+    </style>
+  </head>
+  <body>
+    <h2>로그인</h2>
+    <form action="/login" method="post">
+      <div class="input-container">
+        <i class="fa-solid fa-person-falling icon"></i>
+        <input
+          class="input-field"
+          type="text"
+          placeholder="Username"
+          name="username"
+        />
+      </div>
+
+      <div class="input-container">
+        <i class="fa-solid fa-person-digging icon"></i>
+        <input
+          class="input-field"
+          type="password"
+          placeholder="Password"
+          name="password"
+        />
+      </div>
+
+      <button type="submit" class="btn">Register</button>
+    </form>
+  </body>
+</html>
