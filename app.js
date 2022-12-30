@@ -36,16 +36,24 @@ app.use(
 );
 
 /*로그인 미들웨어*/
+/*
+브라우저 > login.html post는 데이터요청  페이지보여주는건 get요청 . 브라우저가 응답 바로는 표준 x 리다이렉트 써야함 > 성공-실패(오류출력등)마다 리다이렉트가 다름
+
+login next가 없음
+대신 res redirect로 끝냄
+ */
 app.post("/login", (req, res) => {
   let { username } = req.body;
   req.session.user = { username };
-  res.redirect('/');
+  //res.send('로그인성공') //리다이렉트 안하고 그냥 넘기기 경로남음  post 에서 새로고침 다시제출 문제(중복방지등) 로그인은 
+  res.redirect('/'); // 경로 안남기게//  
 });
+
 
 /*전처리 미들웨어*/
 app.use((req, res, next) => {
   console.log("모든 요청에 다 실행됩니다.");
-  if (req.session.user === undefined) {
+  if (req.session.user === undefined) { //로그인이 대있으면next 안대있으면 리다이렉트 
     req.redirect("login.html");
   } else {
     next();
