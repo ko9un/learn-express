@@ -8,6 +8,7 @@ const cookieParser = require("cookie-parser");
 /*환경변수설정*/
 dotenv.config();
 const app = express();
+const secret = process.env.PASSWORD || process.env.COOKIE_SECRET;
 const port = process.env.PORT || 8888;
 
 /* body-parser*/
@@ -43,10 +44,18 @@ login next가 없음
 대신 res redirect로 끝냄
  */
 app.post("/login", (req, res) => {
-  let { username } = req.body;
+  let { username , password } = req.body;
+  /*로그인 성공시*/
+  if(password === secret){
   req.session.user = { username };
+
   //res.send('로그인성공') //리다이렉트 안하고 그냥 넘기기 경로남음  post 에서 새로고침 다시제출 문제(중복방지등) 로그인은 
   res.redirect('/'); // 경로 안남기게//  
+  }else{
+      //로그인 실패처리 
+      res.redirect('/login.html');
+
+  }
 });
 
 
@@ -54,17 +63,20 @@ app.post("/login", (req, res) => {
 app.use((req, res, next) => {
   console.log("모든 요청에 다 실행됩니다.");
   if (req.session.user === undefined) { //로그인이 대있으면next 안대있으면 리다이렉트 
-    req.redirect("login.html");
+    req.redirect("/login.html");
   } else {
     next();
   }
 });
 /*라우트 미들웨어*/
-app.get(
-  "/",
-  (req, res, next) => {
-    console.log("GET / 요청에서만 실행됩니다");
+app.get("/",(req, res, next) => {
+  let user = req.session.user;
+    if(user !== undefined){
+      res.send(`${user.username}님 환영합니다.`); 
+     //todo 로그인 정보가 있으면 환영 메세지 출력하기 
+    }else{
     next();
+    }
   },
   (req, res) => {
     throw new Error("에러는 에러 처리 미들웨어로 갑니다 ");
